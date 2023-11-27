@@ -51,29 +51,25 @@ used to convey the results of a client’s request. The status codes are divided
 
 ## Below are examples of common response structures for both error and success scenarios using JSON format. These examples follow a consistent format for clarity and ease of handling:
 
-### Error Response:
+### Error Response Body:
 
 ```
 {
-  "status": 404,
   "error": {
     "code": "not_found",
     "message": "The requested resource could not be found.",
-    "details": "Additional details about the error, if available."
+    "details": "Please check the resource ID and try again."
   }
 }
-
 ```
-* **status**: HTTP status code indicating the error (e.g., 404 for not found).
 * **error**: An object containing details about the error.
     * **code**: A machine-readable error code.
     * **message**: A human-readable summary of the error.
     * **details**: Additional details about the error, which may include specific information for debugging.
 
-### Success Response:
+### Data Response Body:
 ```
 {
-  "status": 200,
   "data": {
     "message": "User successfully retrieved.",
     "user": {
@@ -83,13 +79,37 @@ used to convey the results of a client’s request. The status codes are divided
     }
   }
 }
-
-
 ```
 
-* **status**: HTTP status code indicating success (200 OK).
 * **data**: An object containing the successful response data.
     * **message**: A message indicating the success of the operation.
     * **user**: The requested user's information.
 
-By using a consistent structure for both error and success responses, you make it easier for developers to handle responses in a unified way. Additionally, including clear messages and relevant details in both scenarios helps with troubleshooting and provides a better developer experience.
+### Handling Both Success and Error in One Response:
+Sometimes, it's useful to include a success or status field in your response to explicitly indicate success or failure. Here's an example that combines both success and error scenarios:
+
+```
+{
+  "status": "success / fail",
+  "data": {
+    "message": "User successfully retrieved.",
+    "user": {
+      "id": 123,
+      "name": "John Doe",
+      "email": "john.doe@example.com"
+    }
+  }
+}
+```
+```
+{
+  "status": "error",
+  "error": {
+    "code": "not_found",
+    "message": "The requested resource could not be found.",
+    "details": "Please check the resource ID and try again."
+  }
+}
+```
+
+By maintaining a consistent structure for both success and error responses, you make it easier for developers to handle responses programmatically and for clients to interpret the results. Additionally, including clear and informative messages helps in troubleshooting and understanding issues during development and integration.
