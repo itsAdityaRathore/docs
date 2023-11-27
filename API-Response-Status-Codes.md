@@ -129,6 +129,7 @@ In this example
     * **message**: A message indicating the success of the operation.
     * **result**: This field contains an empty array ([]) to represent the absence of specific data.
 
+By using this approach, you maintain a consistent structure for your API responses, making it clear that the operation was successful even though there is no data in the array. It helps both developers and clients interpret the response consistently.
 
 #### If the API request is successful and there is data, you can include the data in the result field within the data object. Here's an example with some data:
 ```
@@ -158,5 +159,7 @@ In this example:
     * **data**: An object containing the successful response data.
     * **message**: A message indicating the success of the operation.
     * **result**: This field contains an array with specific data items.
+
+This structure provides a clear indication of the success of the operation along with the actual data returned. It's a common and consistent way to handle successful responses with or without data.
 
 By maintaining a consistent structure for both success and error responses, you make it easier for developers to handle responses programmatically and for clients to interpret the results. Additionally, including clear and informative messages helps in troubleshooting and understanding issues during development and integration.
