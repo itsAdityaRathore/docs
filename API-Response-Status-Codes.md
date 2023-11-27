@@ -85,8 +85,8 @@ used to convey the results of a client’s request. The status codes are divided
     * **message**: A message indicating the success of the operation.
     * **user**: The requested user's information.
 
-### Handling Both Success and Error in One Response:
-Sometimes, it's useful to include a success or status field in your response to explicitly indicate success or failure. Here's an example that combines both success and error scenarios:
+## Handling Both Success and Error in One Response:
+#### Sometimes, it's useful to include a success or status field in your response to explicitly indicate success or failure. Here's an example that combines both success and error scenarios:
 
 ```
 {
@@ -111,5 +111,52 @@ Sometimes, it's useful to include a success or status field in your response to 
   }
 }
 ```
+
+#### When an API request is successful, and the expected result is an empty array, you can structure the response to include an empty array in the data field. Here's an example:
+
+```
+{
+  "status": "success",
+  "data": {
+    "message": "Operation successful.",
+    "result": []
+  }
+}
+```
+In this example
+* **status**: Indicates the overall status of the response, in this case, "success."
+* **data**: An object containing the successful response data.
+    * **message**: A message indicating the success of the operation.
+    * **result**: This field contains an empty array ([]) to represent the absence of specific data.
+
+
+#### If the API request is successful and there is data, you can include the data in the result field within the data object. Here's an example with some data:
+```
+{
+  "status": "success",
+  "data": {
+    "message": "Operation successful.",
+    "result": [
+      {
+        "id": 1,
+        "name": "Example 1",
+        "description": "This is an example item."
+      },
+      {
+        "id": 2,
+        "name": "Example 2",
+        "description": "Another example item."
+      }
+      // ... more items if applicable
+    ]
+  }
+}
+```
+In this example:
+
+* **status**: Indicates the overall status of the response, in this case, "success."
+    * **data**: An object containing the successful response data.
+    * **message**: A message indicating the success of the operation.
+    * **result**: This field contains an array with specific data items.
 
 By maintaining a consistent structure for both success and error responses, you make it easier for developers to handle responses programmatically and for clients to interpret the results. Additionally, including clear and informative messages helps in troubleshooting and understanding issues during development and integration.
